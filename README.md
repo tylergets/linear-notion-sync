@@ -1,17 +1,35 @@
-linear-notion-sync
+Linear Notion Sync
 =================
 
 A CLI tool to sync Linear issues to Notion pages.
 
+[![oclif](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Ftwitter.com%2Ftylergetsay)](https://twitter.com/tylergetsay)
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![Version](https://img.shields.io/npm/v/oclif-hello-world.svg)](https://npmjs.org/package/oclif-hello-world)
 [![Downloads/week](https://img.shields.io/npm/dw/oclif-hello-world.svg)](https://npmjs.org/package/oclif-hello-world)
 [![License](https://img.shields.io/npm/l/oclif-hello-world.svg)](https://github.com/oclif/hello-world/blob/main/package.json)
 
 <!-- toc -->
-
+* [Setup](#setup)
+* [Usage](#usage)
+* [Commands](#commands)
 <!-- tocstop -->
 
+### Disclaimer
+
+This project is currently a work in progress, and may not be ready for production use. Please use at your own risk and report issues. Thanks!
+
+Follow me on Twitter [@TylerGetsay](https://twitter.com/tylergetsay) for updates.
+
+# Setup
+You will need to create a Linear API Token and a Notion API Token. Please follow respective guides for each service.
+
+After creating the tokens, you can run the `setup` command to create a Notion Database with the Linear template. 
+  
+* You will need to provide the Linear Team ID, Notion Page ID, and both API Tokens.
+
+After the setup command is run, you can run the `sync` command to sync Linear issues to the Notion Database.
+# Usage
 <!-- usage -->
 ```sh-session
 $ npm install -g linear-notion-sync
@@ -25,6 +43,8 @@ USAGE
 ...
 ```
 <!-- usagestop -->
+
+# Commands
 <!-- commands -->
 * [`linear-notion-sync help [COMMANDS]`](#linear-notion-sync-help-commands)
 * [`linear-notion-sync linear teams`](#linear-notion-sync-linear-teams)

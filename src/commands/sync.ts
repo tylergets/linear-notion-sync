@@ -1,8 +1,8 @@
 import {Command, Flags} from '@oclif/core'
 import {tokenFlags} from '../flags/tokens'
 import {clientsFromFlags} from '../clients'
-import {Issue} from '@linear/sdk'
-import {markdownToBlocks, markdownToRichText} from '@tryfabric/martian'
+import {Issue, WorkflowState} from '@linear/sdk'
+import {markdownToBlocks} from '@tryfabric/martian'
 
 export default class Setup extends Command {
   static description = 'Sync Linear issues to Notion Database'
@@ -13,6 +13,8 @@ export default class Setup extends Command {
     ...tokenFlags,
     linearTeam: Flags.string({description: 'Linear Team ID', required: true, env: 'LINEAR_TEAM', char: 't'}),
     notionDatabase: Flags.string({description: 'Notion Database ID', required: true, env: 'NOTION_DATABASE', char: 'n'}),
+    includeCompleted: Flags.boolean({description: 'Include completed issues'}),
+    includeCanceled: Flags.boolean({description: 'Include cancelled issues'}),
   }
 
   static args = {}
@@ -23,6 +25,14 @@ export default class Setup extends Command {
 
     const issues = await linear.issues({
       filter: {
+        state: {
+          type: {
+            nin: [
+              ...flags.includeCanceled ? [] : ['canceled'],
+              ...flags.includeCompleted ? [] : ['completed'],
+            ],
+          },
+        },
         team: {
           id: {
             eq: flags.linearTeam,
@@ -41,7 +51,9 @@ export default class Setup extends Command {
     let i = 0
     for (const issue of issues.nodes) {
       i++
-      this.log(`Syncing issue ${i} of ${issues.nodes.length} (${issue.identifier})`)
+      const state = await issue.state!
+
+      this.log(`Syncing issue ${i} of ${issues.nodes.length} (${issue.identifier}) - ${state.name} (${state.type})`)
 
       // Check if issue already exists
       const existingPage = await notion.databases.query({
@@ -54,11 +66,21 @@ export default class Setup extends Command {
         },
       })
 
+      if (state.type === 'completed' && !flags.includeCompleted) {
+        this.log(`Issue ${issue.identifier} is completed, skipping`)
+        continue
+      }
+
+      if (state.type === 'canceled' && !flags.includeCanceled) {
+        this.log(`Issue ${issue.identifier} is cancelled, skipping`)
+        continue
+      }
+
       if (existingPage.results.length > 0) {
         this.log(`Issue ${issue.identifier} already exists in Notion, updating`)
         await notion.pages.update({
           page_id: existingPage.results[0].id,
-          properties: await this.getProperties(issue),
+          properties: await this.getProperties(issue, state),
         })
       } else {
         this.log(`Creating issue ${issue.identifier} in Notion`)
@@ -68,14 +90,14 @@ export default class Setup extends Command {
             database_id: flags.notionDatabase,
           },
           children: markdownToBlocks(issue.description || 'No description'),
-          properties: await this.getProperties(issue),
+          properties: await this.getProperties(issue, state),
         })
       }
     }
   }
 
-  private async getProperties(issue: Issue) {
-    const status = await issue.state?.then((s: any) => s.name)
+  private async getProperties(issue: Issue, state: WorkflowState) {
+    const statusName = state?.name
     const assignee = await issue.assignee?.then((s: any) => s.name)
 
     return {
@@ -119,7 +141,7 @@ export default class Setup extends Command {
       Status: {
         type: 'select',
         select: {
-          name: status,
+          name: statusName,
         },
       },
       Priority: {

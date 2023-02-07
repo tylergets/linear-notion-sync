@@ -41,7 +41,7 @@ $ npm install -g linear-notion-sync
 $ linear-notion-sync COMMAND
 running command...
 $ linear-notion-sync (--version)
-linear-notion-sync/0.1.0 linux-x64 node-v16.17.0
+linear-notion-sync/0.1.0 linux-x64 node-v18.12.1
 $ linear-notion-sync --help [COMMAND]
 USAGE
   $ linear-notion-sync COMMAND
@@ -120,10 +120,13 @@ Sync Linear issues to Notion Database
 ```
 USAGE
   $ linear-notion-sync sync --linearToken <value> --notionToken <value> -t <value> -n <value>
+    [--includeCompleted] [--includeCanceled]
 
 FLAGS
   -n, --notionDatabase=<value>  (required) Notion Database ID
   -t, --linearTeam=<value>      (required) Linear Team ID
+  --includeCanceled             Include cancelled issues
+  --includeCompleted            Include completed issues
   --linearToken=<value>         (required) Linear API Token
   --notionToken=<value>         (required) Notion API Token
 

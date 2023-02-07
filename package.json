@@ -1,6 +1,6 @@
 {
   "name": "linear-notion-sync",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Sync Linear issues to Notion database",
   "author": "Tyler Getsay @tylergets",
   "bin": {

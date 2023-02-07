@@ -18,7 +18,7 @@ $ npm install -g linear-notion-sync
 $ linear-notion-sync COMMAND
 running command...
 $ linear-notion-sync (--version)
-linear-notion-sync/0.0.0 linux-x64 node-v16.17.0
+linear-notion-sync/0.1.0 linux-x64 node-v16.17.0
 $ linear-notion-sync --help [COMMAND]
 USAGE
   $ linear-notion-sync COMMAND
@@ -86,7 +86,7 @@ DESCRIPTION
   Setup Notion Database with Linear Template
 ```
 
-_See code: [dist/commands/setup.ts](https://github.com/tylergets/linear-notion-sync/blob/v0.0.0/dist/commands/setup.ts)_
+_See code: [dist/commands/setup.ts](https://github.com/tylergets/linear-notion-sync/blob/v0.1.0/dist/commands/setup.ts)_
 
 ## `linear-notion-sync sync`
 
@@ -106,7 +106,7 @@ DESCRIPTION
   Sync Linear issues to Notion Database
 ```
 
-_See code: [dist/commands/sync.ts](https://github.com/tylergets/linear-notion-sync/blob/v0.0.0/dist/commands/sync.ts)_
+_See code: [dist/commands/sync.ts](https://github.com/tylergets/linear-notion-sync/blob/v0.1.0/dist/commands/sync.ts)_
 
 ## `linear-notion-sync test`
 
@@ -124,5 +124,5 @@ DESCRIPTION
   Test Linear and Notion Connections
 ```
 
-_See code: [dist/commands/test.ts](https://github.com/tylergets/linear-notion-sync/blob/v0.0.0/dist/commands/test.ts)_
+_See code: [dist/commands/test.ts](https://github.com/tylergets/linear-notion-sync/blob/v0.1.0/dist/commands/test.ts)_
 <!-- commandsstop -->

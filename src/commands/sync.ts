@@ -13,8 +13,6 @@ export default class Setup extends Command {
     ...tokenFlags,
     linearTeam: Flags.string({description: 'Linear Team ID', required: true, env: 'LINEAR_TEAM', char: 't'}),
     notionDatabase: Flags.string({description: 'Notion Database ID', required: true, env: 'NOTION_DATABASE', char: 'n'}),
-    includeCompleted: Flags.boolean({description: 'Include completed issues'}),
-    includeCanceled: Flags.boolean({description: 'Include cancelled issues'}),
   }
 
   static args = {}
@@ -25,14 +23,6 @@ export default class Setup extends Command {
 
     const issues = await linear.issues({
       filter: {
-        state: {
-          type: {
-            nin: [
-              ...flags.includeCanceled ? [] : ['canceled'],
-              ...flags.includeCompleted ? [] : ['completed'],
-            ],
-          },
-        },
         team: {
           id: {
             eq: flags.linearTeam,
@@ -66,16 +56,6 @@ export default class Setup extends Command {
         },
       })
 
-      if (state.type === 'completed' && !flags.includeCompleted) {
-        this.log(`Issue ${issue.identifier} is completed, skipping`)
-        continue
-      }
-
-      if (state.type === 'canceled' && !flags.includeCanceled) {
-        this.log(`Issue ${issue.identifier} is cancelled, skipping`)
-        continue
-      }
-
       if (existingPage.results.length > 0) {
         this.log(`Issue ${issue.identifier} already exists in Notion, updating`)
         await notion.pages.update({
@@ -84,6 +64,7 @@ export default class Setup extends Command {
         })
       } else {
         this.log(`Creating issue ${issue.identifier} in Notion`)
+
         await notion.pages.create({
           parent: {
             type: 'database_id',

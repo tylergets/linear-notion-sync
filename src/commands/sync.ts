@@ -13,6 +13,7 @@ export default class Setup extends Command {
     ...tokenFlags,
     linearTeam: Flags.string({description: 'Linear Team ID', required: true, env: 'LINEAR_TEAM', char: 't'}),
     notionDatabase: Flags.string({description: 'Notion Database ID', required: true, env: 'NOTION_DATABASE', char: 'n'}),
+    slow: Flags.boolean({description: 'Slow down sync to avoid rate limits', required: false, default: false, char: 's'}),
   }
 
   static args = {}
@@ -20,6 +21,10 @@ export default class Setup extends Command {
   async run(): Promise<void> {
     const {flags} = await this.parse(Setup)
     const {linear, notion} = clientsFromFlags(flags)
+
+    if (flags.slow) {
+      this.log('Slow mode enabled, this may take a while')
+    }
 
     const issues = await linear.issues({
       filter: {
@@ -34,12 +39,15 @@ export default class Setup extends Command {
     this.log('Loading Linear Issues')
     while (issues.pageInfo.hasNextPage) {
       await issues.fetchNext()
+      await new Promise(resolve => setTimeout(resolve, flags.slow ? 1000 : 0))
     }
 
     this.log(`Fetched ${issues.nodes.length} issues`)
 
     let i = 0
     for (const issue of issues.nodes) {
+      await new Promise(resolve => setTimeout(resolve, flags.slow ? 1000 : 0))
+
       i++
       const state = await issue.state!
 

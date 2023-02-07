@@ -9,18 +9,17 @@ export default class Setup extends Command {
 
   static flags = {
     ...tokenFlags,
-    linearTeam: Flags.string({description: 'Linear Team Name', required: true, env: 'LINEAR_TEAM', char: 't'}),
+    linearTeam: Flags.string({description: 'Linear Team ID', required: true, env: 'LINEAR_TEAM', char: 't'}),
+    notionPageId: Flags.string({description: 'Notion Page ID to contain Database', required: true, env: 'NOTION_PAGE', char: 'n'}),
   }
 
-  static args = {
-    pageId: Args.string({description: 'Notion Page ID to contain Database', required: true}),
-  }
+  static args = {}
 
   async run(): Promise<void> {
-    const {flags, args} = await this.parse(Setup)
+    const {flags} = await this.parse(Setup)
     const {notion, linear} = clientsFromFlags(flags)
 
-    const pageId = args.pageId
+    const pageId = flags.notionPageId
 
     const team = await linear.team(flags.linearTeam)
 

@@ -1,15 +1,15 @@
 {
   "name": "linear-notion-sync",
   "version": "0.0.0",
-  "description": "oclif example Hello World CLI",
+  "description": "Sync Linear issues to Notion database",
   "author": "Tyler Getsay @tylergets",
   "bin": {
     "linear-notion-sync": "./bin/run"
   },
-  "homepage": "https://github.com/tylergets/hello-world",
+  "homepage": "https://github.com/tylergets/linear-notion-sync",
   "license": "MIT",
   "main": "dist/index.js",
-  "repository": "tylergets/hello-world",
+  "repository": "tylergets/linear-notion-sync",
   "files": [
     "/bin",
     "/dist",
@@ -49,8 +49,8 @@
     ],
     "topicSeparator": " ",
     "topics": {
-      "hello": {
-        "description": "Say hello to the world and others"
+      "linear": {
+        "description": "Linear tools"
       }
     }
   },
@@ -66,7 +66,7 @@
   "engines": {
     "node": ">=12.0.0"
   },
-  "bugs": "https://github.com/tylergets/hello-world/issues",
+  "bugs": "https://github.com/tylergets/linear-notion-sync/issues",
   "keywords": [
     "oclif"
   ],

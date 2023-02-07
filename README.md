@@ -1,86 +1,36 @@
-oclif-hello-world
+linear-notion-sync
 =================
 
-oclif example Hello World CLI
+A CLI tool to sync Linear issues to Notion pages.
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![Version](https://img.shields.io/npm/v/oclif-hello-world.svg)](https://npmjs.org/package/oclif-hello-world)
-[![CircleCI](https://circleci.com/gh/oclif/hello-world/tree/main.svg?style=shield)](https://circleci.com/gh/oclif/hello-world/tree/main)
 [![Downloads/week](https://img.shields.io/npm/dw/oclif-hello-world.svg)](https://npmjs.org/package/oclif-hello-world)
 [![License](https://img.shields.io/npm/l/oclif-hello-world.svg)](https://github.com/oclif/hello-world/blob/main/package.json)
 
 <!-- toc -->
-* [Usage](#usage)
-* [Commands](#commands)
+
 <!-- tocstop -->
-# Usage
+
 <!-- usage -->
 ```sh-session
 $ npm install -g linear-notion-sync
 $ linear-notion-sync COMMAND
 running command...
 $ linear-notion-sync (--version)
-linear-notion-sync/0.0.0 linux-x64 node-v18.12.1
+linear-notion-sync/0.0.0 linux-x64 node-v16.17.0
 $ linear-notion-sync --help [COMMAND]
 USAGE
   $ linear-notion-sync COMMAND
 ...
 ```
 <!-- usagestop -->
-# Commands
 <!-- commands -->
-* [`linear-notion-sync hello PERSON`](#linear-notion-sync-hello-person)
-* [`linear-notion-sync hello world`](#linear-notion-sync-hello-world)
 * [`linear-notion-sync help [COMMANDS]`](#linear-notion-sync-help-commands)
-* [`linear-notion-sync plugins`](#linear-notion-sync-plugins)
-* [`linear-notion-sync plugins:install PLUGIN...`](#linear-notion-sync-pluginsinstall-plugin)
-* [`linear-notion-sync plugins:inspect PLUGIN...`](#linear-notion-sync-pluginsinspect-plugin)
-* [`linear-notion-sync plugins:install PLUGIN...`](#linear-notion-sync-pluginsinstall-plugin-1)
-* [`linear-notion-sync plugins:link PLUGIN`](#linear-notion-sync-pluginslink-plugin)
-* [`linear-notion-sync plugins:uninstall PLUGIN...`](#linear-notion-sync-pluginsuninstall-plugin)
-* [`linear-notion-sync plugins:uninstall PLUGIN...`](#linear-notion-sync-pluginsuninstall-plugin-1)
-* [`linear-notion-sync plugins:uninstall PLUGIN...`](#linear-notion-sync-pluginsuninstall-plugin-2)
-* [`linear-notion-sync plugins update`](#linear-notion-sync-plugins-update)
-
-## `linear-notion-sync hello PERSON`
-
-Say hello
-
-```
-USAGE
-  $ linear-notion-sync hello [PERSON] -f <value>
-
-ARGUMENTS
-  PERSON  Person to say hello to
-
-FLAGS
-  -f, --from=<value>  (required) Who is saying hello
-
-DESCRIPTION
-  Say hello
-
-EXAMPLES
-  $ oex hello friend --from oclif
-  hello friend from oclif! (./src/commands/hello/index.ts)
-```
-
-_See code: [dist/commands/hello/index.ts](https://github.com/tylergets/hello-world/blob/v0.0.0/dist/commands/hello/index.ts)_
-
-## `linear-notion-sync hello world`
-
-Say hello world
-
-```
-USAGE
-  $ linear-notion-sync hello world
-
-DESCRIPTION
-  Say hello world
-
-EXAMPLES
-  $ linear-notion-sync hello world
-  hello world! (./src/commands/hello/world.ts)
-```
+* [`linear-notion-sync linear teams`](#linear-notion-sync-linear-teams)
+* [`linear-notion-sync setup`](#linear-notion-sync-setup)
+* [`linear-notion-sync sync`](#linear-notion-sync-sync)
+* [`linear-notion-sync test`](#linear-notion-sync-test)
 
 ## `linear-notion-sync help [COMMANDS]`
 
@@ -102,236 +52,77 @@ DESCRIPTION
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.2.2/src/commands/help.ts)_
 
-## `linear-notion-sync plugins`
+## `linear-notion-sync linear teams`
 
-List installed plugins.
-
-```
-USAGE
-  $ linear-notion-sync plugins [--core]
-
-FLAGS
-  --core  Show core plugins.
-
-DESCRIPTION
-  List installed plugins.
-
-EXAMPLES
-  $ linear-notion-sync plugins
-```
-
-_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v2.3.0/src/commands/plugins/index.ts)_
-
-## `linear-notion-sync plugins:install PLUGIN...`
-
-Installs a plugin into the CLI.
+Get Linear Teams
 
 ```
 USAGE
-  $ linear-notion-sync plugins:install PLUGIN...
-
-ARGUMENTS
-  PLUGIN  Plugin to install.
+  $ linear-notion-sync linear teams --linearToken <value> --notionToken <value>
 
 FLAGS
-  -f, --force    Run yarn install with force flag.
-  -h, --help     Show CLI help.
-  -v, --verbose
+  --linearToken=<value>  (required) Linear API Token
+  --notionToken=<value>  (required) Notion API Token
 
 DESCRIPTION
-  Installs a plugin into the CLI.
-  Can be installed from npm or a git url.
-
-  Installation of a user-installed plugin will override a core plugin.
-
-  e.g. If you have a core plugin that has a 'hello' command, installing a user-installed plugin with a 'hello' command
-  will override the core plugin implementation. This is useful if a user needs to update core plugin functionality in
-  the CLI without the need to patch and update the whole CLI.
-
-
-ALIASES
-  $ linear-notion-sync plugins add
-
-EXAMPLES
-  $ linear-notion-sync plugins:install myplugin 
-
-  $ linear-notion-sync plugins:install https://github.com/someuser/someplugin
-
-  $ linear-notion-sync plugins:install someuser/someplugin
+  Get Linear Teams
 ```
 
-## `linear-notion-sync plugins:inspect PLUGIN...`
+## `linear-notion-sync setup`
 
-Displays installation properties of a plugin.
+Setup Notion Database with Linear Template
 
 ```
 USAGE
-  $ linear-notion-sync plugins:inspect PLUGIN...
-
-ARGUMENTS
-  PLUGIN  [default: .] Plugin to inspect.
+  $ linear-notion-sync setup --linearToken <value> --notionToken <value> -t <value> -n <value>
 
 FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-GLOBAL FLAGS
-  --json  Format output as json.
+  -n, --notionPageId=<value>  (required) Notion Page ID to contain Database
+  -t, --linearTeam=<value>    (required) Linear Team ID
+  --linearToken=<value>       (required) Linear API Token
+  --notionToken=<value>       (required) Notion API Token
 
 DESCRIPTION
-  Displays installation properties of a plugin.
-
-EXAMPLES
-  $ linear-notion-sync plugins:inspect myplugin
+  Setup Notion Database with Linear Template
 ```
 
-## `linear-notion-sync plugins:install PLUGIN...`
+_See code: [dist/commands/setup.ts](https://github.com/tylergets/linear-notion-sync/blob/v0.0.0/dist/commands/setup.ts)_
 
-Installs a plugin into the CLI.
+## `linear-notion-sync sync`
+
+Sync Linear issues to Notion Database
 
 ```
 USAGE
-  $ linear-notion-sync plugins:install PLUGIN...
-
-ARGUMENTS
-  PLUGIN  Plugin to install.
+  $ linear-notion-sync sync --linearToken <value> --notionToken <value> -t <value> -n <value>
 
 FLAGS
-  -f, --force    Run yarn install with force flag.
-  -h, --help     Show CLI help.
-  -v, --verbose
+  -n, --notionDatabase=<value>  (required) Notion Database ID
+  -t, --linearTeam=<value>      (required) Linear Team ID
+  --linearToken=<value>         (required) Linear API Token
+  --notionToken=<value>         (required) Notion API Token
 
 DESCRIPTION
-  Installs a plugin into the CLI.
-  Can be installed from npm or a git url.
-
-  Installation of a user-installed plugin will override a core plugin.
-
-  e.g. If you have a core plugin that has a 'hello' command, installing a user-installed plugin with a 'hello' command
-  will override the core plugin implementation. This is useful if a user needs to update core plugin functionality in
-  the CLI without the need to patch and update the whole CLI.
-
-
-ALIASES
-  $ linear-notion-sync plugins add
-
-EXAMPLES
-  $ linear-notion-sync plugins:install myplugin 
-
-  $ linear-notion-sync plugins:install https://github.com/someuser/someplugin
-
-  $ linear-notion-sync plugins:install someuser/someplugin
+  Sync Linear issues to Notion Database
 ```
 
-## `linear-notion-sync plugins:link PLUGIN`
+_See code: [dist/commands/sync.ts](https://github.com/tylergets/linear-notion-sync/blob/v0.0.0/dist/commands/sync.ts)_
 
-Links a plugin into the CLI for development.
+## `linear-notion-sync test`
+
+Test Linear and Notion Connections
 
 ```
 USAGE
-  $ linear-notion-sync plugins:link PLUGIN
-
-ARGUMENTS
-  PATH  [default: .] path to plugin
+  $ linear-notion-sync test --linearToken <value> --notionToken <value>
 
 FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
+  --linearToken=<value>  (required) Linear API Token
+  --notionToken=<value>  (required) Notion API Token
 
 DESCRIPTION
-  Links a plugin into the CLI for development.
-  Installation of a linked plugin will override a user-installed or core plugin.
-
-  e.g. If you have a user-installed or core plugin that has a 'hello' command, installing a linked plugin with a 'hello'
-  command will override the user-installed or core plugin implementation. This is useful for development work.
-
-
-EXAMPLES
-  $ linear-notion-sync plugins:link myplugin
+  Test Linear and Notion Connections
 ```
 
-## `linear-notion-sync plugins:uninstall PLUGIN...`
-
-Removes a plugin from the CLI.
-
-```
-USAGE
-  $ linear-notion-sync plugins:uninstall PLUGIN...
-
-ARGUMENTS
-  PLUGIN  plugin to uninstall
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Removes a plugin from the CLI.
-
-ALIASES
-  $ linear-notion-sync plugins unlink
-  $ linear-notion-sync plugins remove
-```
-
-## `linear-notion-sync plugins:uninstall PLUGIN...`
-
-Removes a plugin from the CLI.
-
-```
-USAGE
-  $ linear-notion-sync plugins:uninstall PLUGIN...
-
-ARGUMENTS
-  PLUGIN  plugin to uninstall
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Removes a plugin from the CLI.
-
-ALIASES
-  $ linear-notion-sync plugins unlink
-  $ linear-notion-sync plugins remove
-```
-
-## `linear-notion-sync plugins:uninstall PLUGIN...`
-
-Removes a plugin from the CLI.
-
-```
-USAGE
-  $ linear-notion-sync plugins:uninstall PLUGIN...
-
-ARGUMENTS
-  PLUGIN  plugin to uninstall
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Removes a plugin from the CLI.
-
-ALIASES
-  $ linear-notion-sync plugins unlink
-  $ linear-notion-sync plugins remove
-```
-
-## `linear-notion-sync plugins update`
-
-Update installed plugins.
-
-```
-USAGE
-  $ linear-notion-sync plugins update [-h] [-v]
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Update installed plugins.
-```
+_See code: [dist/commands/test.ts](https://github.com/tylergets/linear-notion-sync/blob/v0.0.0/dist/commands/test.ts)_
 <!-- commandsstop -->

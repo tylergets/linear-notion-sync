@@ -2,8 +2,8 @@ import {Command} from '@oclif/core'
 import {tokenFlags} from '../flags/tokens'
 import {clientsFromFlags} from '../clients'
 
-export default class World extends Command {
-  static description = 'Say hello world'
+export default class Test extends Command {
+  static description = 'Test Linear and Notion Connections'
 
   static flags = {
     ...tokenFlags,
@@ -12,7 +12,7 @@ export default class World extends Command {
   static args = {}
 
   async run(): Promise<void> {
-    const {flags} = await this.parse(World)
+    const {flags} = await this.parse(Test)
 
     const clients = clientsFromFlags(flags)
 

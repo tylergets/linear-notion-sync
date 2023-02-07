@@ -29,6 +29,8 @@ After creating the tokens, you can run the `setup` command to create a Notion Da
 * You will need to provide the Linear Team ID, Notion Page ID, and both API Tokens.
 
 After the setup command is run, you can run the `sync` command to sync Linear issues to the Notion Database.
+
+* You will need to provide the Linear Team ID, Notion Database ID, and both API Tokens.
 # Usage
 <!-- usage -->
 ```sh-session

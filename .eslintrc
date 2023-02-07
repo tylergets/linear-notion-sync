@@ -1,0 +1,10 @@
+{
+  "extends": [
+    "oclif",
+    "oclif-typescript"
+  ],
+  "rules": {
+    "camelcase": "off",
+    "no-await-in-loop": "off"
+  }
+}

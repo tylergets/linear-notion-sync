@@ -5,9 +5,9 @@ A CLI tool to sync Linear issues to Notion pages.
 
 [![oclif](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Ftwitter.com%2Ftylergetsay)](https://twitter.com/tylergetsay)
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
-[![Version](https://img.shields.io/npm/v/oclif-hello-world.svg)](https://npmjs.org/package/oclif-hello-world)
-[![Downloads/week](https://img.shields.io/npm/dw/oclif-hello-world.svg)](https://npmjs.org/package/oclif-hello-world)
-[![License](https://img.shields.io/npm/l/oclif-hello-world.svg)](https://github.com/oclif/hello-world/blob/main/package.json)
+[![Version](https://img.shields.io/npm/v/linear-notion-sync.svg)](https://npmjs.org/package/linear-notion-sync)
+[![Downloads/week](https://img.shields.io/npm/dw/linear-notion-sync.svg)](https://npmjs.org/package/linear-notion-sync)
+[![License](https://img.shields.io/npm/l/linear-notion-sync.svg)](https://github.com/oclif/hello-world/blob/main/package.json)
 
 <!-- toc -->
 * [Setup](#setup)

@@ -21,7 +21,7 @@
     "@notionhq/client": "^2.2.3",
     "@oclif/core": "^2",
     "@oclif/plugin-help": "^5",
-    "@oclif/plugin-plugins": "^2.3.0",
+    "@oclif/plugin-plugins": "^2.3.2",
     "@tryfabric/martian": "^1.2.4"
   },
   "devDependencies": {

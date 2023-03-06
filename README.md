@@ -119,14 +119,12 @@ Sync Linear issues to Notion Database
 
 ```
 USAGE
-  $ linear-notion-sync sync --linearToken <value> --notionToken <value> -t <value> -n <value>
-    [--includeCompleted] [--includeCanceled]
+  $ linear-notion-sync sync --linearToken <value> --notionToken <value> -t <value> -n <value> [-s]
 
 FLAGS
   -n, --notionDatabase=<value>  (required) Notion Database ID
+  -s, --slow                    Slow down sync to avoid rate limits
   -t, --linearTeam=<value>      (required) Linear Team ID
-  --includeCanceled             Include cancelled issues
-  --includeCompleted            Include completed issues
   --linearToken=<value>         (required) Linear API Token
   --notionToken=<value>         (required) Notion API Token
 

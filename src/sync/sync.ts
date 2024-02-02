@@ -21,6 +21,7 @@ export class LinearNotionSync {
   private async getProperties(issue: Issue, state: WorkflowState) {
     const statusName = state?.name
     const assignee = await issue.assignee?.then((s: any) => s.name)
+    const project = await issue.project?.then((p: any) => p.name) || ''
 
     return {
       Title: {
@@ -65,6 +66,17 @@ export class LinearNotionSync {
         select: {
           name: statusName,
         },
+      },
+      Project: {
+        type: 'rich_text',
+        rich_text: [
+          {
+            type: 'text',
+            text: {
+              content: project,
+            },
+          },
+        ],
       },
       Priority: {
         type: 'select',

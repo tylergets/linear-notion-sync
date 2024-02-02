@@ -72,6 +72,9 @@ export default class Setup extends Command {
             }),
           },
         },
+        Project: {
+          rich_text: {},
+        },
         Priority: {
           select: {
             options: [
